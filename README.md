@@ -23,9 +23,9 @@ End-to-end crop/land scoring application with a Python FastAPI backend and a Rea
 └── README.md
 ```
 
-## Phase 5 — API Endpoint (current)
+## Phase 6 — Score Endpoint Tests (current)
 
-`POST /score` is live in `backend/app/main.py`. It validates input, scores the request, logs an audit record, and returns `request_id`, `score`, `reason_codes`, and `timestamp`.
+API tests for `POST /score` live in `backend/tests/test_score.py`, covering happy path and validation errors.
 
 ## Backend Setup
 
@@ -79,7 +79,7 @@ pytest -v
 | 3 | Rule-based scoring logic (`scoring.py`) | Done |
 | 4 | Audit logging (`logging_config.py`) | Done |
 | 5 | `POST /score` API endpoint | Done |
-| 6 | Score endpoint unit tests |
+| 6 | Score endpoint unit tests | Done |
 | 7 | React frontend |
 | 8 | Documentation (`LLM_NOTES.md`, time-box proof) |
 
