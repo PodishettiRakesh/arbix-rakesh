@@ -23,9 +23,9 @@ End-to-end crop/land scoring application with a Python FastAPI backend and a Rea
 └── README.md
 ```
 
-## Phase 6 — Score Endpoint Tests (current)
+## Phase 7 — Frontend (current)
 
-API tests for `POST /score` live in `backend/tests/test_score.py`, covering happy path and validation errors.
+React + Vite UI in `frontend/` with a scoring form, loading/error states, and score + reason code display.
 
 ## Backend Setup
 
@@ -45,22 +45,36 @@ pip install -r requirements.txt
 From the `backend/` directory:
 
 ```bash
-uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+uvicorn app.main:app --reload --host 0.0.0.0 --port 8002
 ```
 
-API base URL: `http://localhost:8000`
+API base URL: `http://localhost:8002`
 
-- Health check: `GET http://localhost:8000/health`
-- Score endpoint: `POST http://localhost:8000/score`
-- Interactive docs: `http://localhost:8000/docs`
+- Health check: `GET http://localhost:8002/health`
+- Score endpoint: `POST http://localhost:8002/score`
+- Interactive docs: `http://localhost:8002/docs`
 
 ### Example `POST /score` request
 
 ```bash
-curl -X POST http://localhost:8000/score \
+curl -X POST http://localhost:8002/score \
   -H "Content-Type: application/json" \
   -d "{\"land_area_acres\": 6, \"crop_type\": \"wheat\", \"repayment_history_score\": 85, \"annual_income_band\": \"2-5L\"}"
 ```
+
+## Run the Frontend
+
+From the `frontend/` directory:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Frontend URL: `http://localhost:5173`
+
+Make sure the backend is running on port `8002` before submitting the form.
 
 ## Run Tests
 
@@ -80,7 +94,7 @@ pytest -v
 | 4 | Audit logging (`logging_config.py`) | Done |
 | 5 | `POST /score` API endpoint | Done |
 | 6 | Score endpoint unit tests | Done |
-| 7 | React frontend |
+| 7 | React frontend | Done |
 | 8 | Documentation (`LLM_NOTES.md`, time-box proof) |
 
 ## Contact
