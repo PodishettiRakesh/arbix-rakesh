@@ -23,9 +23,9 @@ End-to-end crop/land scoring application with a Python FastAPI backend and a Rea
 └── README.md
 ```
 
-## Phase 2 — Data Models (current)
+## Phase 3 — Scoring Logic (current)
 
-Pydantic request/response models with validation are in `backend/app/schemas.py`. Scoring, logging, and the `/score` endpoint come in later phases.
+Rule-based scoring lives in `backend/app/scoring.py` via `calculate_score()`. Audit logging and the `/score` API endpoint come in later phases.
 
 ## Backend Setup
 
@@ -67,7 +67,7 @@ pytest -v
 | ----- | ----- | ------ |
 | 1 | Backend setup & test harness | Done |
 | 2 | Data models & validation (`schemas.py`) | Done |
-| 3 | Rule-based scoring logic (`scoring.py`) |
+| 3 | Rule-based scoring logic (`scoring.py`) | Done |
 | 4 | Audit logging (`logging_config.py`) |
 | 5 | `POST /score` API endpoint |
 | 6 | Score endpoint unit tests |
