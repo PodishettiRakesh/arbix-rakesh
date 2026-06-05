@@ -23,9 +23,9 @@ End-to-end crop/land scoring application with a Python FastAPI backend and a Rea
 └── README.md
 ```
 
-## Phase 3 — Scoring Logic (current)
+## Phase 5 — API Endpoint (current)
 
-Rule-based scoring lives in `backend/app/scoring.py` via `calculate_score()`. Audit logging and the `/score` API endpoint come in later phases.
+`POST /score` is live in `backend/app/main.py`. It validates input, scores the request, logs an audit record, and returns `request_id`, `score`, `reason_codes`, and `timestamp`.
 
 ## Backend Setup
 
@@ -51,7 +51,16 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 API base URL: `http://localhost:8000`
 
 - Health check: `GET http://localhost:8000/health`
+- Score endpoint: `POST http://localhost:8000/score`
 - Interactive docs: `http://localhost:8000/docs`
+
+### Example `POST /score` request
+
+```bash
+curl -X POST http://localhost:8000/score \
+  -H "Content-Type: application/json" \
+  -d "{\"land_area_acres\": 6, \"crop_type\": \"wheat\", \"repayment_history_score\": 85, \"annual_income_band\": \"2-5L\"}"
+```
 
 ## Run Tests
 
@@ -68,8 +77,8 @@ pytest -v
 | 1 | Backend setup & test harness | Done |
 | 2 | Data models & validation (`schemas.py`) | Done |
 | 3 | Rule-based scoring logic (`scoring.py`) | Done |
-| 4 | Audit logging (`logging_config.py`) |
-| 5 | `POST /score` API endpoint |
+| 4 | Audit logging (`logging_config.py`) | Done |
+| 5 | `POST /score` API endpoint | Done |
 | 6 | Score endpoint unit tests |
 | 7 | React frontend |
 | 8 | Documentation (`LLM_NOTES.md`, time-box proof) |
