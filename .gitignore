@@ -1,0 +1,92 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+
+# Build & distribution
+dist/
+build/
+out/
+*.egg-info/
+*.egg
+*.whl
+target/
+bin/
+obj/
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# Logs & runtime
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing & coverage
+coverage/
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+.nox/
+*.lcov
+.nyc_output/
+
+# IDE & editors
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json.example
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.temp
+*.bak
+*.cache
+
+# Compiled & binary
+*.exe
+*.dll
+*.so
+*.dylib
+*.class
+*.jar
+*.war
+
+# Package manager locks (uncomment if you prefer not to commit lock files)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+# poetry.lock
+# Pipfile.lock
