@@ -23,6 +23,16 @@ def test_score_happy_path(client):
     assert "request_id" in data
     assert "timestamp" in data
 
+    stored = client.get(f"/scores/{data['request_id']}")
+    assert stored.status_code == 200
+    assert stored.json()["score"] == data["score"]
+    assert stored.json()["reason_codes"] == data["reason_codes"]
+
+
+def test_get_score_not_found(client):
+    response = client.get("/scores/non-existent-id")
+    assert response.status_code == 404
+
 
 def test_score_validation_error_negative_land_area(client):
     response = client.post(

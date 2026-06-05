@@ -22,12 +22,12 @@ End-to-end crop/land credit scoring application built for the Arbix AI Round 1 p
 - [x] **Logging** — Structured JSON audit logs per scoring request
 - [x] **Tests** — 35 backend tests (schemas, scoring, logging, API endpoint, health)
 - [x] **React UI** — Vite + React form with loading, inline errors, and score display
+- [x] **SQLite persistence** — Score records saved to `backend/data/scores.db`; retrievable via `GET /scores/{request_id}`
 
 ## What Was Skipped (and Why)
 
 | Skipped | Reason |
 | ------- | ------ |
-| Database (SQLite/Postgres) | Prioritized core end-to-end flow within the 90-minute time-box |
 | Docker / docker-compose | Optional bonus; focused on working API + UI first |
 
 ## Design Decisions & Tradeoffs
@@ -36,12 +36,12 @@ End-to-end crop/land credit scoring application built for the Arbix AI Round 1 p
 - **Rule-based scoring** — Spec explicitly said ML was not required; rules are transparent, explainable, and easy to test.
 - **Separated modules** — `schemas.py`, `scoring.py`, and `logging_config.py` keep API, business logic, and logging concerns isolated.
 - **Structured audit logging** — JSON console logs capture scoring-relevant fields only: `request_id`, `timestamp`, `land_area`, `repayment_score`, `income_band`, `final_score`, and `reason_codes`. Crop label is excluded from audit output to keep logs focused on scoring inputs, per the spec's guidance to avoid unnecessary data in logs.
+- **SQLite persistence** — Each successful score is stored in `backend/data/scores.db` using stdlib `sqlite3` (no extra ORM dependency).
 - **Port 8002** — Backend configured on port `8002` for local development.
 - **Progressive commits** — Each phase (setup, models, scoring, logging, API, tests, frontend) committed separately for clear history.
 
 ## If Given 2 More Hours
 
-- Add SQLite persistence for score request history
 - Add Dockerfile / docker-compose for one-command startup
 - Expand test coverage (edge cases, logging integration tests)
 - Environment-based API URL in frontend (`.env`) instead of hardcoded localhost
@@ -70,7 +70,9 @@ See [LLM_NOTES.md](LLM_NOTES.md) for example prompts and a correction example.
 │   │   ├── main.py           # FastAPI app + POST /score
 │   │   ├── schemas.py        # Pydantic request/response models
 │   │   ├── scoring.py        # Rule-based scoring logic
-│   │   └── logging_config.py # Structured audit logging
+│   │   ├── logging_config.py # Structured audit logging
+│   │   └── database.py       # SQLite persistence
+│   ├── data/                 # SQLite DB (gitignored)
 │   ├── tests/
 │   │   ├── test_health.py
 │   │   ├── test_schemas.py
@@ -120,6 +122,7 @@ Open **http://localhost:5173** and ensure the backend is running on **http://loc
 | -------- | ------ | ----------- |
 | `/health` | GET | Health check |
 | `/score` | POST | Calculate credit score |
+| `/scores/{request_id}` | GET | Retrieve a persisted score record |
 | `/docs` | GET | Swagger UI |
 
 ### Example request

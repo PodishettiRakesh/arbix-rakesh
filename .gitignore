@@ -29,6 +29,10 @@ obj/
 credentials.json
 secrets.json
 
+# Database
+backend/data/
+*.db
+
 # Logs & runtime
 logs/
 *.log
