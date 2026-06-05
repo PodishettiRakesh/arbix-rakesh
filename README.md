@@ -23,9 +23,9 @@ End-to-end crop/land scoring application with a Python FastAPI backend and a Rea
 └── README.md
 ```
 
-## Phase 1 — Backend Setup (current)
+## Phase 2 — Data Models (current)
 
-Dependencies installed and a minimal FastAPI skeleton is in place. Scoring, validation, logging, and the `/score` endpoint are intentionally not implemented yet — each will land in its own phase/commit.
+Pydantic request/response models with validation are in `backend/app/schemas.py`. Scoring, logging, and the `/score` endpoint come in later phases.
 
 ## Backend Setup
 
@@ -63,9 +63,10 @@ pytest -v
 
 ## Upcoming Phases
 
-| Phase | Scope |
-| ----- | ----- |
-| 2 | Data models & validation (`schemas.py`) |
+| Phase | Scope | Status |
+| ----- | ----- | ------ |
+| 1 | Backend setup & test harness | Done |
+| 2 | Data models & validation (`schemas.py`) | Done |
 | 3 | Rule-based scoring logic (`scoring.py`) |
 | 4 | Audit logging (`logging_config.py`) |
 | 5 | `POST /score` API endpoint |
